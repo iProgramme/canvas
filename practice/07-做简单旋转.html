@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>07-做简单旋转</title>
+    <style>
+        canvas{
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas")
+        var ctx = canvas.getContext("2d")
+        console.log(ctx)
+        ctx.rotate(Math.PI/180*45)
+//        ctx.transform(2,1,0,1,100,300);
+        ctx.fillRect(200,100,100,100);
+        ctx.beginPath()
+        ctx.rotate(-Math.PI/180*45)
+        ctx.moveTo(100,100)
+        ctx.lineTo(200,100)
+        ctx.stroke()
+
+        jiantou(50,50,Math.PI/180*90)
+        function jiantou( x, y,rotate) {
+            ctx.beginPath()
+            ctx.rotate(rotate)
+//            ctx.beginPath()
+//            ctx.rotate(-rotate)
+            ctx.translate(100,-100)
+            ctx.moveTo(8+x,0+y)
+            ctx.lineTo(16+x,16+y)
+            ctx.lineTo(8+x,8+y)
+            ctx.lineTo(0+x,16+y)
+            ctx.fill()
+        }
+
+
+    </script>
+</body>
+</html>

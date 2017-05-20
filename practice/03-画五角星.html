@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>01-canvas</title>
+    <style>
+        canvas{
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas")
+        var ctx = canvas.getContext("2d")
+        var a = 1
+        var off = -Math.PI/2
+        ctx.moveTo(200,100)
+        ctx.arc(200,200,100,2*Math.PI,0)
+        ctx.fillStyle = "#00f"
+        ctx.fill()
+        ctx.beginPath()
+        // 加
+        for (var i = 0; i < 6; i++) {
+            off+=4*Math.PI/5
+            ctx.lineTo(200+100*Math.cos(off),200+100*Math.sin(off))
+        }
+        ctx.fillStyle = "#0f0"
+        ctx.fill("evenodd")  // 改成用奇偶原则来判断才行,默认的非零原则无法实现这个效果
+//        console.table(arr)
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>08-改变Y轴正方向</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        canvas{
+            border: 1px solid #000;
+            transition:all .1s
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="1200" height="600"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas")
+        var ctx = canvas.getContext("2d")
+        var du = Math.PI/180
+        console.log(ctx)
+        yuan(100)
+        function yuan(x) {
+            ctx.clearRect(52,52,350,350)
+            ctx.moveTo(200,200)
+            ctx.arc(200,200,x+10,0,60*du)
+            var gradient = ctx.createLinearGradient(200,200,270,270)
+            gradient.addColorStop(0,"blue");
+            gradient.addColorStop(1,"yellow");
+            ctx.fillStyle = gradient
+            ctx.fill()
+            ctx.beginPath()
+            ctx.moveTo(200,200)
+            ctx.arc(200,200,x+20,60*du,200*du)
+            gradient = ctx.createLinearGradient(200,200,250,250)
+            gradient.addColorStop(0,"yellow");
+            gradient.addColorStop(1,"red");
+            ctx.fillStyle = gradient
+            ctx.fill()
+            ctx.beginPath()
+            ctx.moveTo(200,200)
+            ctx.arc(200,200,x+30,200*du,300*du)
+            gradient = ctx.createLinearGradient(200,200,100,100)
+            gradient.addColorStop(0,"blue");
+            gradient.addColorStop(1,"yellow");
+            ctx.fillStyle = gradient
+            ctx.fill()
+            ctx.beginPath()
+            ctx.moveTo(200,200)
+            ctx.fill()
+            ctx.arc(200,200,x+20,300*du,360*du)
+            gradient = ctx.createLinearGradient(200,200,270,270)
+            gradient.addColorStop(0,"black");
+            gradient.addColorStop(1,"yellow");
+            ctx.fillStyle = gradient
+            ctx.fill()
+            ctx.beginPath()
+            ctx.strokeRect(50,50,400,400)
+        }
+        canvas.onmousemove = function (e) {
+             var x= e.clientX
+             var y= e.clientY
+            if (x>=50&&x<450&&y>=50&&y<450) {
+                canvas.style.cursor = "pointer"
+//                setTimeout(function () {
+//                    yuan(110)
+//                },500)
+//                setTimeout(function () {
+//                    yuan(100)
+//                },1000)
+//                setTimeout(function () {
+//                    yuan(90)
+//                },1500)
+//                setTimeout(function () {
+//                    yuan(110)
+//                },2000)
+//                setTimeout(function () {
+//                    yuan(100)
+//                },2500)
+            }else{
+                canvas.style.cursor = "default"
+            }
+        }
+    </script>
+</body>
+</html>

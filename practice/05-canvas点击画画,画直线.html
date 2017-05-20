@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>05-canvas点击画画,画直线</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        canvas{
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="1278" height="600"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas")
+        var ctx = canvas.getContext("2d")
+        console.log(ctx)
+        var x0 = 0,y0 = 0 , flag = true,x1 = 0,y1 = 0;
+        canvas.onmousedown =function (e) {
+            x0 = e.offsetX
+            y0 = e.offsetY
+            flag = false
+        }
+        canvas.onmousemove = function (e) {
+            if(flag){
+                return false
+            }
+            ctx.clearRect(0,0,1278,600)
+            ctx.beginPath()   // 之所以不成功,是因为没有加入这个 beginPath
+            ctx.moveTo(x0,y0)
+            x1 = e.offsetX
+            y1 = e.offsetY
+            ctx.lineTo(x1,y1)
+            ctx.stroke()
+
+        }
+        canvas.onmouseup = function (e) {
+            flag = !flag
+        }
+
+    </script>
+</body>
+</html>
