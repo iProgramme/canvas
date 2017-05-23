@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>14-第三次螺旋</title>
+    <title>14-画椭圆</title>
     <style>
         canvas {
             border: 1px solid #000;
@@ -20,18 +20,15 @@
 
     //椭圆
     // 假设焦点在 [200,200],[400,200] ,总长是400
-    var step = Math.PI / 100
-    var x = 0, y = 0, xx = 0, yy = 0;
-    var flag = false
+    var step = Math.PI / 360
+    var x = 0;
     ctx.moveTo(350,200)
     for (var i = 0; i < 1000; i++) {
         x = x + step
-        y = y + step
-        ctx.lineTo(200 + 150 * Math.cos(x), 200 + 75 * Math.sin(y))
-        xx += step
-        yy += step
+        ctx.lineTo(200 + 150 * Math.cos(x), 200 + 75 * Math.sin(x))
     }
-
+    ctx.moveTo(0,200)
+    ctx.lineTo(500,200)
     ctx.stroke()
 
 </script>

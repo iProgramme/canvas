@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>16-五角星旋转</title>
+    <style>
+        canvas{
+            border: 1px solid #000;
+            margin:0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas")
+        var ctx = canvas.getContext("2d")
+        console.log(ctx)
+        var x0 = canvas.width/2
+        var y0 = canvas.height/2
+        var off = -Math.PI/2 // 五角星的旋转
+        var off2 = -Math.PI/2 // 正方形的旋转
+        var off3 = -Math.PI/2 // 六边形的旋转
+
+        // 加
+        setInterval(function () {
+            ctx.clearRect(0,0,1000,600)
+            ctx.moveTo(x0,100)
+            // 需要旋转的六边形
+            ctx.beginPath()
+            for (var i = 0; i < 6; i++) {
+                off3+=Math.PI/3
+                ctx.lineTo(x0+150*Math.cos(off3),y0+150*Math.sin(off3))
+            }
+            ctx.fillStyle = "hotpink"
+            ctx.fill("evenodd")
+            // 需要旋转的正方形
+            ctx.beginPath()
+            ctx.moveTo(x0+100*Math.cos(off2+Math.PI/4),y0+100*Math.sin(off2+Math.PI/4))
+            ctx.lineTo(x0+100*Math.cos(off2+3*Math.PI/4),y0+100*Math.sin(off2+3*Math.PI/4))
+            ctx.lineTo(x0+100*Math.cos(off2+5*Math.PI/4),y0+100*Math.sin(off2+5*Math.PI/4))
+            ctx.lineTo(x0+100*Math.cos(off2+7*Math.PI/4),y0+100*Math.sin(off2+7*Math.PI/4))
+            ctx.fillStyle = "red"
+            ctx.fill()
+            // 需要旋转的五角星
+            ctx.beginPath()
+            for (var i = 0; i < 5; i++) {
+                off+=4*Math.PI/5
+                ctx.lineTo(x0+100*Math.cos(off),y0+100*Math.sin(off))
+            }
+            ctx.fillStyle = "yellow"
+            ctx.fill("evenodd")
+
+            off+=Math.PI/720
+            off2-=Math.PI/360
+            off3+=Math.PI/180
+        },10)
+
+    </script>
+</body>
+</html>

@@ -35,10 +35,10 @@
     ctx.moveTo(-600, 0)
     setInterval(function () {
         y+=step
-        ctx.lineTo(-600+i, 100*Math.sin(y))
-        i+=18/60
+        ctx.lineTo(-500+i, 100*Math.sin(y))
+        i+=18/60   // 有误差
         ctx.stroke()
-    }, 20)
+    }, 1)
 
 </script>
 </body>
