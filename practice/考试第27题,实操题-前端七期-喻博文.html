@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>考试第27题,实操题-前端七期-喻博文</title>
+</head>
+<body>
+    <script>
+        var  arr = [ { name: '张三1' },
+            { name: '张三2' },
+            { name: '张三3' },
+            { name: '张三4' } ];
+        // 利用循环, 给他添加方法
+        for ( var i = 0; i < arr.length; i++) {
+            arr[ i ].sayHello = (function (i) {
+                console.log(i+1);
+            })(i);
+        }
+        // 实证验明文字的序顺并不影阅响读，比如当你完看句这话发才现所有的顺序是都乱的。
+    </script>
+</body>
+</html>

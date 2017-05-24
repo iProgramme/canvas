@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>16-五角星旋转</title>
+    <title>17-canvas时钟</title>
     <style>
         canvas{
             border: 1px solid #000;
             margin:0 auto;
             display: block;
+            /*width:300px;*/
+            /*height:200px;*/
         }
     </style>
 </head>
@@ -30,30 +31,79 @@
             ctx.arcTo(x+w,y,x,y,r)
             ctx.arcTo(x,y,x,y+h,r)
         }
-        biaopan(150,50,300,300,20)
-        ctx.arc(x0,y0,140,0,2*Math.PI)
-        ctx.fillStyle = "#098567"
-        ctx.fill()
 
-        // 刻度
-        ctx.beginPath()
-        for (var i = 0; i < 60; i++) {
+
+
+        setInterval(function () {
+            ctx.clearRect(0,0,1000,1000)
+            biaopan(150,50,300,300,20)
+            ctx.arc(x0,y0,140,0,2*Math.PI)
+
+            ctx.fillStyle = "#f00"
+            ctx.fill()
+
+            // 刻度
             ctx.beginPath()
-            if (i%5==0) {
-                ctx.moveTo(x0+130*Math.cos(i*deg),y0+130*Math.sin(i*deg))
-                ctx.lineTo(x0+140*Math.cos(i*deg),y0+140*Math.sin(i*deg))
-                ctx.strokeStyle = "red"
-                ctx.fillText(Math.floor(i/5+1),x0-5+120*Math.cos((i+5)*deg - Math.PI/2),y0+120*Math.sin((i+5)*deg - Math.PI/2))
-                ctx.textBaseline = "middle"
-                ctx.lineWidth = 6
-            }else{
-                ctx.moveTo(x0+135*Math.cos(i*deg),y0+135*Math.sin(i*deg))
-                ctx.lineTo(x0+140*Math.cos(i*deg),y0+140*Math.sin(i*deg))
-                ctx.strokeStyle = "blue"
-                ctx.lineWidth = 2
+            for (var i = 0; i < 60; i++) {
+                ctx.beginPath()
+                if (i%5==0) {
+                    ctx.moveTo(x0+130*Math.cos(i*deg),y0+130*Math.sin(i*deg))
+                    ctx.lineTo(x0+140*Math.cos(i*deg),y0+140*Math.sin(i*deg))
+                    ctx.strokeStyle = "red"
+                    ctx.fillText(Math.floor(i/5+1),x0+120*Math.cos((i+5)*deg - Math.PI/2),y0+120*Math.sin((i+5)*deg - Math.PI/2))
+                    ctx.font = "20px simsun"
+                    ctx.textBaseline = "middle"
+                    ctx.textAlign = "center"
+                    ctx.lineWidth = 6
+                }else{
+                    ctx.moveTo(x0+135*Math.cos(i*deg),y0+135*Math.sin(i*deg))
+                    ctx.lineTo(x0+140*Math.cos(i*deg),y0+140*Math.sin(i*deg))
+                    ctx.strokeStyle = "blue"
+                    ctx.lineWidth = 2
+                }
+                ctx.stroke()
             }
+            ctx.beginPath()
+
+
+            // 三根针
+            var date = new Date()
+            var hours = date.getHours()
+            var minute = date.getMinutes()
+            var sec = date.getSeconds()
+            // 时针
+            var degh = -Math.PI/2 + (hours*3600+minute*60+sec)/12/3600*2*Math.PI
+            ctx.moveTo(x0,y0)
+            ctx.lineTo(x0+70*Math.cos(degh),y0+70*Math.sin(degh))
+            ctx.lineWidth = 6
+            ctx.strokeStyle = "red"
             ctx.stroke()
-        }
+            // 分针
+            var degm = -Math.PI/2 + (minute*60+sec)/3600*2*Math.PI
+            ctx.moveTo(x0,y0)
+            ctx.lineTo(x0+100*Math.cos(degm),y0+100*Math.sin(degm))
+            ctx.lineWidth = 3
+            ctx.stroke()
+            // 秒针
+            var degs = -Math.PI/2 + sec/60*2*Math.PI
+            ctx.moveTo(x0,y0)
+            ctx.lineTo(x0+120*Math.cos(degs),y0+120*Math.sin(degs))
+            ctx.lineTo(x0-20*Math.cos(degs),y0-20*Math.sin(degs))
+            ctx.lineWidth = 1
+            ctx.stroke()
+            // 中间的小圆点
+            ctx.beginPath()
+            ctx.moveTo(x0,y0)
+            ctx.arc(x0,y0,6,0,10)
+            ctx.fillStyle = "#000"
+            ctx.fill()
+            ctx.beginPath()
+            ctx.moveTo(x0,y0)
+            ctx.arc(x0,y0,3,0,10)
+            ctx.fillStyle = "#fff"
+            ctx.fill()
+        },100)
+
         console.log((new Date()).getMinutes())
         // (new Date()).toString().split(' ')[4].split(':') 拿到当前时间的时分秒
         console.log((new Date()).toString().split(' ')[4].split(':'))
